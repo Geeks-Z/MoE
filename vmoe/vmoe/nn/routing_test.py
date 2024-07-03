@@ -23,6 +23,9 @@ from vmoe.nn import routing
 
 
 class NoisyTopExpertsPerItemRouterTest(parameterized.TestCase):
+  """Noisy TopExpertsPerItem router used in
+  [Scaling Vision with Sparse Mixture of Experts](https://arxiv.org/abs/2106.05974)
+  """
 
   def setUp(self):
     super().setUp()
@@ -92,7 +95,7 @@ class NoisyTopExpertsPerItemRouterTest(parameterized.TestCase):
         num_experts=4,
         num_selected_experts=2,
         noise_std=1.0,
-        deterministic=True)
+        deterministic=False)
     # y's are dispatch weights, m's are metrics.
     y1, m1 = layer.apply(variables, x, rngs={'gating': jax.random.PRNGKey(0)})
     y2, m2 = layer.apply(variables, x, rngs={'gating': jax.random.PRNGKey(1)})
